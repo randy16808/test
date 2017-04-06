@@ -458,33 +458,129 @@
 	// Add user logic here
 	
 	reg [8:0] abs_diff[0:3];
-	wire [8:0] prev_pixel[0:4];
-	wire [8:0] curr_pixel[0:4];
-	wire [8:0] diff[0:4];
+	wire [8:0] p_pixel[0:15];
+	wire [8:0] c_pixel[0:15];
+	wire [8:0] diff[0:15];
 	assign p_pixel[0] = {1'b0, slv_reg0[31:24]};
+	assign p_pixel[1] = {1'b0, slv_reg0[23:16]};
+	assign p_pixel[2] = {1'b0, slv_reg0[15:8]};
+	assign p_pixel[3] = {1'b0, slv_reg0[7:0]};
+	assign p_pixel[4] = {1'b0, slv_reg1[31:24]};
+	assign p_pixel[5] = {1'b0, slv_reg1[23:16]};
+	assign p_pixel[6] = {1'b0, slv_reg1[15:8]};
+	assign p_pixel[7] = {1'b0, slv_reg1[7:0]};
+	assign p_pixel[8] = {1'b0, slv_reg2[31:24]};
+	assign p_pixel[9] = {1'b0, slv_reg2[23:16]};
+	assign p_pixel[10] = {1'b0, slv_reg2[15:8]};
+	assign p_pixel[11] = {1'b0, slv_reg2[7:0]};
+	assign p_pixel[12] = {1'b0, slv_reg3[31:24]};
+	assign p_pixel[13] = {1'b0, slv_reg3[23:16]};
+	assign p_pixel[14] = {1'b0, slv_reg3[15:8]};
+	assign p_pixel[15] = {1'b0, slv_reg3[7:0]};
+	
 	assign c_pixel[0] = {1'b0, slv_reg4[31:24]};
-	. . .
+	assign c_pixel[1] = {1'b0, slv_reg4[23:16]};
+	assign c_pixel[2] = {1'b0, slv_reg4[15:8]};
+	assign c_pixel[3] = {1'b0, slv_reg4[7:0]};
+	assign c_pixel[4] = {1'b0, slv_reg5[31:24]};
+	assign c_pixel[5] = {1'b0, slv_reg5[23:16]};
+	assign c_pixel[6] = {1'b0, slv_reg5[15:8]};
+	assign c_pixel[7] = {1'b0, slv_reg5[7:0]};
+	assign c_pixel[8] = {1'b0, slv_reg6[31:24]};
+	assign c_pixel[9] = {1'b0, slv_reg6[23:16]};
+	assign c_pixel[10] = {1'b0, slv_reg6[15:8]};
+	assign c_pixel[11] = {1'b0, slv_reg6[7:0]};
+	assign c_pixel[12] = {1'b0, slv_reg7[31:24]};
+	assign c_pixel[13] = {1'b0, slv_reg7[23:16]};
+	assign c_pixel[14] = {1'b0, slv_reg7[15:8]};
+	assign c_pixel[15] = {1'b0, slv_reg7[7:0]};
+	
 	assign diff[0] = p_pixel[0] - c_pixel[0];
+	assign diff[1] = p_pixel[1] - c_pixel[1];
+	assign diff[2] = p_pixel[2] - c_pixel[2];
+	assign diff[3] = p_pixel[3] - c_pixel[3];
+	assign diff[4] = p_pixel[4] - c_pixel[4];
+	assign diff[5] = p_pixel[5] - c_pixel[5];
+	assign diff[6] = p_pixel[6] - c_pixel[6];
+	assign diff[7] = p_pixel[7] - c_pixel[7];
+	assign diff[8] = p_pixel[8] - c_pixel[7];
+	assign diff[9] = p_pixel[9] - c_pixel[7];
+	assign diff[10] = p_pixel[10] - c_pixel[10];
+	assign diff[11] = p_pixel[11] - c_pixel[11];
+	assign diff[12] = p_pixel[12] - c_pixel[12];
+	assign diff[13] = p_pixel[13] - c_pixel[13];
+	assign diff[14] = p_pixel[14] - c_pixel[14];
+	assign diff[15] = p_pixel[15] - c_pixel[15];
 	always@(posedge S_AXI_ACLK)
 	  begin
 		if (S_AXI_ARESETN == 1'b0)
 		  abs_diff[0] <= 0;
-		  //. . .
+		  abs_diff[1] <= 0;
+		  abs_diff[2] <= 0;
+		  abs_diff[3] <= 0;
+		  abs_diff[4] <= 0;
+		  abs_diff[5] <= 0;
+		  abs_diff[6] <= 0;
+		  abs_diff[7] <= 0;
+		  abs_diff[8] <= 0;
+		  abs_diff[9] <= 0;
+		  abs_diff[10] <= 0;
+		  abs_diff[11] <= 0;
+		  abs_diff[12] <= 0;
+		  abs_diff[13] <= 0;
+		  abs_diff[14] <= 0;
+		  abs_diff[15] <= 0;
 		else
 		  abs_diff[0] <= (diff[0][8] == 1’b1)? –diff[0] : diff[0];
-		  //. . .
+		  abs_diff[1] <= (diff[1][8] == 1’b1)? –diff[1] : diff[1];
+		  abs_diff[2] <= (diff[2][8] == 1’b1)? –diff[2] : diff[2];
+		  abs_diff[3] <= (diff[3][8] == 1’b1)? –diff[3] : diff[3];
+		  abs_diff[4] <= (diff[4][8] == 1’b1)? –diff[4] : diff[4];
+		  abs_diff[5] <= (diff[5][8] == 1’b1)? –diff[5] : diff[5];
+		  abs_diff[6] <= (diff[6][8] == 1’b1)? –diff[6] : diff[6];
+		  abs_diff[7] <= (diff[7][8] == 1’b1)? –diff[7] : diff[7];
+		  abs_diff[8] <= (diff[8][8] == 1’b1)? –diff[8] : diff[8];
+		  abs_diff[9] <= (diff[9][8] == 1’b1)? –diff[9] : diff[9];
+		  abs_diff[10] <= (diff[10][8] == 1’b1)? –diff[10] : diff[10];
+		  abs_diff[11] <= (diff[11][8] == 1’b1)? –diff[11] : diff[11];
+		  abs_diff[12] <= (diff[12][8] == 1’b1)? –diff[12] : diff[12];
+		  abs_diff[13] <= (diff[13][8] == 1’b1)? –diff[13] : diff[13];
+		  abs_diff[14] <= (diff[14][8] == 1’b1)? –diff[14] : diff[14];
+		  abs_diff[15] <= (diff[15][8] == 1’b1)? –diff[15] : diff[15];
+	end            
+	
+	reg [12:0] sad_result;
+	wire [9:0] p1_sum[0:7];
+	assign p1_sum[0] = abs_diff[0] + abs_diff[1];
+	assign p1_sum[1] = abs_diff[2] + abs_diff[3];
+	assign p1_sum[2] = abs_diff[4] + abs_diff[5];
+	assign p1_sum[3] = abs_diff[6] + abs_diff[7];
+	assign p1_sum[4] = abs_diff[8] + abs_diff[9];
+	assign p1_sum[5] = abs_diff[10] + abs_diff[11];
+	assign p1_sum[6] = abs_diff[12] + abs_diff[13];
+	assign p1_sum[7] = abs_diff[14] + abs_diff[15];
+	
+	reg [10:0] p2_sum[0:3];
+	always @(posedge S_AXI_ACLK)
+	  begin
+		if (S_AXI_ARESETN == 1'b0)
+		  p2_sum[0] <= 0;
+		  p2_sum[1] <= 0;
+		  p2_sum[2] <= 0;
+		  p2_sum[3] <= 0;
+		else
+		  p2_sum[0] <= p1_sum[0] + p1_sum[1];
+		  p2_sum[1] <= p1_sum[2] + p1_sum[3];
+		  p2_sum[2] <= p1_sum[4] + p1_sum[5];
+		  p2_sum[3] <= p1_sum[6] + p1_sum[7];
 	end
 	
-	reg [10:0] sad_result;
-	wire [9:0] partial_sum[0:1];
-	assign partial_sum[0] = abs_diff[0] + abs_diff[1];
-	assign partial_sum[1] = abs_diff[2] + abs_diff[3];
 	always @(posedge S_AXI_ACLK)
 	  begin
 		if (S_AXI_ARESETN == 1'b0)
 		  sad_result <= 0;
 		else
-		  sad_result <= partial_sum[0] + partial_sum[1];
+		  sad_result <= p2_sum[0] + p2_sum[1] + p2_sum[2] + p2_sum[3];
 	end
 	// User logic ends
 
